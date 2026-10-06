@@ -42,7 +42,10 @@ Halaman utama jalan tanpa database. Fitur daftar dan login butuh dua environment
 
 ## Tugas Docker
 
-Repo ini sengaja belum punya `Dockerfile` dan `compose.yaml`. Instruksinya:
+Repo ini sudah punya `Dockerfile`, `compose.yaml`, dan `nginx.conf` untuk tugas Docker Compose. Jalankan stack lokal dengan langkah berikut:
 
-1. [TASKS.md](TASKS.md): bikin `Dockerfile` dan deploy ke EC2
-2. [TASKS-2.md](TASKS-2.md): Docker Compose (Nginx + app + PostgreSQL) dan scan image pakai Trivy
+1. Salin `.env.example` menjadi `.env`, lalu isi semua nilainya. Gunakan password heksadesimal (misalnya hasil `openssl rand -hex 16`) agar aman dipakai dalam `DATABASE_URL`, dan buat `SESSION_SECRET` dengan `openssl rand -hex 32`.
+2. Jalankan `docker compose up -d --build`.
+3. Verifikasi dengan `docker compose ps` dan buka `http://localhost/api/health`; respons database yang sehat berisi `"db":"ok"`.
+
+Untuk instruksi deploy ke EC2, Trivy, dan daftar pengumpulan, lihat [TASKS-2.md](TASKS-2.md).
