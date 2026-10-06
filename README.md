@@ -49,3 +49,9 @@ Repo ini sudah punya `Dockerfile`, `compose.yaml`, dan `nginx.conf` untuk tugas 
 3. Verifikasi dengan `docker compose ps` dan buka `http://localhost/api/health`; respons database yang sehat berisi `"db":"ok"`.
 
 Untuk instruksi deploy ke EC2, Trivy, dan daftar pengumpulan, lihat [TASKS-2.md](TASKS-2.md).
+
+## CI GitHub Actions
+
+Workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) otomatis berjalan setiap ada push atau pull request. Workflow ini membangun Docker image dari `Dockerfile`, lalu memindainya dengan Trivy. Build atau scan akan menggagalkan workflow jika ditemukan kerentanan ber-severity HIGH atau CRITICAL.
+
+Workflow ini belum melakukan deploy ke EC2; deploy pada langkah tugas masih dilakukan manual.
